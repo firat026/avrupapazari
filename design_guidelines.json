@@ -1,0 +1,130 @@
+{
+  "theme_strategy": {
+    "core_concept": "Premium European Auto Dealership & Garage (Light Mode Exclusive)",
+    "description": "A refined, Scandinavian-inspired light theme focusing on space, high-contrast imagery, and crisp typography. The UI avoids unnecessary borders, favoring soft drop-shadows and generous padding. 10 harmonious accent color themes are provided via a theme switcher, each injecting a specific automotive personality while keeping the luxury light-mode base intact."
+  },
+  "typography": {
+    "headings": {
+      "family": "Cabinet Grotesk, sans-serif",
+      "weight": "800",
+      "style": "tracking-tighter",
+      "usage": "Use for all H1, H2, H3 elements to provide a European editorial feel."
+    },
+    "body": {
+      "family": "Satoshi, Inter, sans-serif",
+      "weight": "400",
+      "style": "tracking-normal leading-relaxed",
+      "usage": "Use for all paragraphs, forms, and secondary text."
+    },
+    "scale": {
+      "h1": "text-5xl md:text-6xl tracking-tighter",
+      "h2": "text-3xl md:text-4xl tracking-tight",
+      "h3": "text-2xl md:text-3xl tracking-tight",
+      "body": "text-base md:text-lg text-foreground/80"
+    }
+  },
+  "colors": {
+    "base_light": {
+      "background": "0 0% 100%",
+      "foreground": "0 0% 9%",
+      "card": "0 0% 98%",
+      "card-foreground": "0 0% 9%",
+      "popover": "0 0% 100%",
+      "popover-foreground": "0 0% 9%",
+      "muted": "0 0% 96.1%",
+      "muted-foreground": "0 0% 45.1%",
+      "border": "0 0% 89.8%",
+      "input": "0 0% 89.8%",
+      "ring": "0 0% 9%"
+    },
+    "theme_variants_10": [
+      { "name": "Azure Blue", "class": "theme-azure", "primary": "221 83% 53%", "primary_foreground": "0 0% 100%", "accent": "221 83% 95%", "accent_foreground": "221 83% 20%" },
+      { "name": "Racing Crimson", "class": "theme-crimson", "primary": "349 75% 50%", "primary_foreground": "0 0% 100%", "accent": "349 75% 95%", "accent_foreground": "349 75% 20%" },
+      { "name": "Eco Sage", "class": "theme-sage", "primary": "150 40% 45%", "primary_foreground": "0 0% 100%", "accent": "150 40% 95%", "accent_foreground": "150 40% 20%" },
+      { "name": "Champagne", "class": "theme-champagne", "primary": "40 60% 60%", "primary_foreground": "0 0% 100%", "accent": "40 60% 95%", "accent_foreground": "40 60% 20%" },
+      { "name": "Onyx Black", "class": "theme-onyx", "primary": "0 0% 15%", "primary_foreground": "0 0% 100%", "accent": "0 0% 95%", "accent_foreground": "0 0% 10%" },
+      { "name": "Cobalt", "class": "theme-cobalt", "primary": "230 85% 45%", "primary_foreground": "0 0% 100%", "accent": "230 85% 95%", "accent_foreground": "230 85% 20%" },
+      { "name": "Sunset Copper", "class": "theme-copper", "primary": "15 70% 55%", "primary_foreground": "0 0% 100%", "accent": "15 70% 95%", "accent_foreground": "15 70% 20%" },
+      { "name": "Titanium", "class": "theme-titanium", "primary": "210 20% 50%", "primary_foreground": "0 0% 100%", "accent": "210 20% 95%", "accent_foreground": "210 20% 20%" },
+      { "name": "Emerald", "class": "theme-emerald", "primary": "160 80% 40%", "primary_foreground": "0 0% 100%", "accent": "160 80% 95%", "accent_foreground": "160 80% 20%" },
+      { "name": "Plum Velvet", "class": "theme-plum", "primary": "300 40% 45%", "primary_foreground": "0 0% 100%", "accent": "300 40% 95%", "accent_foreground": "300 40% 20%" }
+    ]
+  },
+  "layouts": {
+    "global_spacing": "Generous spacing using p-8 to p-16 for sections to convey luxury.",
+    "hero_section": "Half-and-half layout or massive bold heading with large vehicle image overlapping the bottom. Glassmorphism for the booking/filter widget overlay.",
+    "bento_grid": "Use for the 'Services' section. grid-cols-1 md:grid-cols-4. 1 large card for 'Diagnostic', 2 medium for 'Repair' & 'Wash', 1 tall for 'Appointment CTA'.",
+    "inventory_grid": "grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8. Cards with pure white background, subtle border, hover translation upwards. Large high-res images inside the cards.",
+    "header": "Sticky nav with backdrop-blur-xl bg-white/70. High contrast text.",
+    "admin_dashboard": "Sidebar layout, dense data tables using Shadcn, clear typographic hierarchy."
+  },
+  "components": {
+    "buttons": "Pill-shaped (rounded-full). Primary buttons use the active theme's primary color with a hover effect scaling the button slightly.",
+    "cards": "Subtle roundness (rounded-2xl), border-border/50, flat surface, soft shadow on hover.",
+    "filters": "Horizontal scrollable pills for categories or Shadcn select dropdowns for Make/Model.",
+    "language_switcher": "Simple dropdown in header with flag or NL/EN/TR text.",
+    "theme_switcher": "A grid of 10 small colored circles inside a popover in the header, allowing users to select their preferred accent color.",
+    "forms": "Use Shadcn Input/Form. Label text-sm uppercase tracking-wider. Input fields with bg-muted/30."
+  },
+  "image_urls": {
+    "hero_showroom": {
+      "url": "https://images.unsplash.com/photo-1545276133-d91bcba0803c?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA1ODh8MHwxfHNlYXJjaHw0fHxtb2Rlcm4lMjBsdXh1cnklMjBjYXIlMjBzaG93cm9vbSUyMGJyaWdodHxlbnwwfHx8fDE3ODM4MzExNTl8MA&ixlib=rb-4.1.0&q=85",
+      "description": "White luxury vehicle in bright modern showroom - Hero background"
+    },
+    "inventory_1": {
+      "url": "https://images.unsplash.com/photo-1618642624018-a370cbf3cd80?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA1ODh8MHwxfHNlYXJjaHwyfHxtb2Rlcm4lMjBsdXh1cnklMjBjYXIlMjBzaG93cm9vbSUyMGJyaWdodHxlbnwwfHx8fDE3ODM4MzExNTl8MA&ixlib=rb-4.1.0&q=85",
+      "description": "White mercedes benz coupe"
+    },
+    "inventory_2": {
+      "url": "https://images.unsplash.com/photo-1619284111834-34efc7051f0e?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA1ODh8MHwxfHNlYXJjaHwzfHxtb2Rlcm4lMjBsdXh1cnklMjBjYXIlMjBzaG93cm9vbSUyMGJyaWdodHxlbnwwfHx8fDE3ODM4MzExNTl8MA&ixlib=rb-4.1.0&q=85",
+      "description": "Green and black car"
+    },
+    "inventory_3": {
+      "url": "https://images.unsplash.com/photo-1644749700856-a82a92828a1b?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA1ODh8MHwxfHNlYXJjaHwxfHxtb2Rlcm4lMjBsdXh1cnklMjBjYXIlMjBzaG93cm9vbSUyMGJyaWdodHxlbnwwfHx8fDE3ODM4MzExNTl8MA&ixlib=rb-4.1.0&q=85",
+      "description": "Red luxury car"
+    },
+    "service_mechanic_1": {
+      "url": "https://images.unsplash.com/photo-1775687902926-3244299ee7d4?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NDk1Nzh8MHwxfHNlYXJjaHw0fHxwcm9mZXNzaW9uYWwlMjBhdXRvJTIwbWVjaGFuaWMlMjB3b3JraW5nJTIwY2xlYW4lMjBnYXJhZ2V8ZW58MHx8fHwxNzgzODMxMTU5fDA&ixlib=rb-4.1.0&q=85",
+      "description": "Blue car parked in modern garage"
+    },
+    "service_ev_charging": {
+      "url": "https://images.unsplash.com/photo-1763625903516-7346f11b3a01?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NDk1Nzh8MHwxfHNlYXJjaHwxfHxwcm9mZXNzaW9uYWwlMjBhdXRvJTIwbWVjaGFuaWMlMjB3b3JraW5nJTIwY2xlYW4lMjBnYXJhZ2V8ZW58MHx8fHwxNzgzODMxMTU5fDA&ixlib=rb-4.1.0&q=85",
+      "description": "Man charging white EV - good for Eco/Modern service section"
+    },
+    "service_wash": {
+      "url": "https://images.unsplash.com/photo-1782235869336-2370b783da4a?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NDk1Nzh8MHwxfHNlYXJjaHwzfHxwcm9mZXNzaW9uYWwlMjBhdXRvJTIwbWVjaGFuaWMlMjB3b3JraW5nJTIwY2xlYW4lMjBnYXJhZ2V8ZW58MHx8fHwxNzgzODMxMTU5fDA&ixlib=rb-4.1.0&q=85",
+      "description": "Man washing sports car"
+    }
+  },
+  "visual_enhancers": {
+    "motion": "Use Framer Motion. Elements fade in and slide up slightly on scroll. Car inventory cards should slightly scale up their image on hover.",
+    "textures": "Keep it pristine. No heavy noise or grunge. Rely on high-resolution images, crisp typography, and subtle shadows.",
+    "glassmorphism": "Used for floating appointment booking bar on mobile and main navigation header. Must use backdrop-blur-xl and bg-white/70."
+  },
+  "instructions_to_main_agent": [
+    "Inject the base colors in index.css inside :root for light mode. Add 10 additional class-based themes (e.g., .theme-azure, .theme-crimson) defining their own --primary, --primary-foreground, --accent and --accent-foreground hues inside index.css.",
+    "Ensure dark mode is strictly DISABLED or maps identically to light mode, since user requested exclusively 10 LIGHT, harmonious themes.",
+    "Create a ThemeContext in React to manage switching between the 10 themes and apply the selected theme class to the document body.",
+    "Create a Multi-language Context (NL, EN, TR) with a translation dictionary and a switcher in the header.",
+    "For the Landing Page: Build a Hero with an advanced filter bar (Make, Model, Year, Price) mimicking a premium SaaS or Airbnb-style search.",
+    "For the Inventory Section: Use standard Shadcn components for filters but customize them to look minimalistic. Render high-quality car cards.",
+    "For Services: Design a 'Bento Grid' highlighting diagnostics, repairs, car wash, and EV charging.",
+    "For Appointments: Integrate a Shadcn Calendar with a clean multi-step form for booking.",
+    "For Admin Panel: Include a separate route (/admin) with a sidebar layout. Use Shadcn Tables for listing cars and appointments. Use charts (recharts) for basic analytics.",
+    "Icons MUST come from @phosphor-icons/react or lucide-react. Use Duotone or Thin weights to match the luxury feel.",
+    "Ensure ALL interactive elements include `data-testid` attributes.",
+    "Use `.js` or `.jsx` extensions for all React components, since this project is configured for JavaScript rather than TypeScript."
+  ],
+  "UNIVERSAL GUIDELINES FOR MAIN AGENT": [
+    "Never use generic centered layouts or simplistic gradients.",
+    "Create depth through layered design elements with z-index hierarchy and glass-morphism.",
+    "Do NOT apply universal transitions (e.g. `transition: all`). Target specific properties.",
+    "Do NOT center align the app container in CSS.",
+    "Use pill-shaped or sharp buttons with interactive hover animations.",
+    "Never use emoji characters for icons.",
+    "Implement Sonner for toast notifications.",
+    "Use 2-3x more spacing (p-8, p-12) than standard to give a premium feel.",
+    "All interactive and key informational elements MUST include a `data-testid` attribute to facilitate robust automated testing.",
+    "DO NOT use complete transparent background in header, overlays, or any surface that has content under it. Example: Dropdown with transparent background."
+  ]
+}
