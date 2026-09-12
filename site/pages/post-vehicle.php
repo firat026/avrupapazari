@@ -532,7 +532,7 @@ document.addEventListener('DOMContentLoaded', function() {
     function loadCities(countryId, preselect) {
         citySelect.innerHTML = '<option value=""><?= $tr['select'] ?></option>';
         if (!countryId) return;
-        fetch('<?= BASE_URL ?>/api/get-cities.php?country_id=' + countryId)
+        fetch('<?= BASE_URL ?>/ajax/get-cities.php?country_id=' + countryId)
             .then(function(res) { return res.json(); })
             .then(function(cities) {
                 if (!Array.isArray(cities)) return;

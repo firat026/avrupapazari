@@ -220,7 +220,6 @@ include __DIR__ . '/../includes/header.php';
 <script>
 (function () {
     try {
-        document.documentElement.classList.add('property-page-loading');
         if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
         var y = sessionStorage.getItem('property_scroll_y');
         sessionStorage.removeItem('property_scroll_y');
@@ -253,7 +252,7 @@ include __DIR__ . '/../includes/header.php';
                     <p><?= e($selectedCategory && $selectedCategory['description'] ? $selectedCategory['description'] : (t('second_hand.subtitle') ?: 'Binlerce ikinci el ve sıfır ürünü keşfet, güvenle al ve sat.')) ?></p>
                 </div>
                 <div class="sh-hero-actions">
-                    <a href="<?= e(BASE_URL) ?>/pages/map.php?module=ikinci_el<?= $categoryId ? '&category_id=' . $categoryId : '' ?>" class="sh-map-btn">
+                    <a href="<?= e(BASE_URL) ?>/pages/map.php?module=emlak<?= $categoryId ? '&category_id=' . $categoryId : '' ?>" class="sh-map-btn">
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6"/><line x1="8" y1="2" x2="8" y2="18"/><line x1="16" y1="6" x2="16" y2="22"/></svg>
                         <span><?= e(t('nav.map_search') ?: 'Haritada Ara') ?></span>
                     </a>
@@ -436,7 +435,7 @@ include __DIR__ . '/../includes/header.php';
                             <?php if ($propertyType): ?><input type="hidden" name="property_type" value="<?= e($propertyType) ?>"><?php endif; ?>
                             <?php if ($transactionType): ?><input type="hidden" name="transaction_type" value="<?= e($transactionType) ?>"><?php endif; ?>
                             
-                            <select name="sort" onchange="this.form.submit()" aria-label="<?= e($label('sort', 'Sıralama')) ?>">
+                            <select name="sort" aria-label="<?= e($label('sort', 'Sıralama')) ?>">
                                 <option value="newest" <?= $sort === 'newest' ? 'selected' : '' ?>><?= e($label('common_sort_newest', 'En Yeni')) ?></option>
                                 <option value="oldest" <?= $sort === 'oldest' ? 'selected' : '' ?>><?= e($label('common_sort_oldest', 'En Eski')) ?></option>
                                 <option value="price_asc" <?= $sort === 'price_asc' ? 'selected' : '' ?>><?= e($label('common_sort_price_low', 'Fiyat: Düşükten Yükseğe')) ?></option>
@@ -511,7 +510,7 @@ include __DIR__ . '/../includes/header.php';
 
 <script>
 document.addEventListener('DOMContentLoaded', function () {
-    document.documentElement.classList.remove('property-page-loading');
+
     if (typeof window.__propertyScrollY === 'number') {
         window.scrollTo(0, window.__propertyScrollY);
     }
@@ -604,4 +603,5 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 </script>
 
+<script src="<?= asset('js/listing-ajax.js') ?>" defer></script>
 <?php include __DIR__ . '/../includes/footer.php'; ?>

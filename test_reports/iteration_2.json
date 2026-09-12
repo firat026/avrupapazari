@@ -1,0 +1,26 @@
+{
+  "summary": "Frontend-only regression testing for AvrupaPazari fixes: map link module context, AJAX-only listing updates (no reload), .sh-cats-slider hidden, and Switzerland (CH) country. All 5 test areas passed.",
+  "backend_issues": {"critical": [], "minor": []},
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": []
+  },
+  "tests_executed": [
+    {"name": "Map header link module context", "result": "PASS", "details": "nav-map href: / => /pages/map.php; search-vehicles => ?module=arac; property => ?module=emlak; second-hand => ?module=ikinci_el; businesses => ?module=esnaf. In-page .sh-hero-categories Haritada Ara link on vehicles=?module=arac and property=?module=emlak (previously wrongly ikinci_el, now fixed). /pages/map.php?module=arac returns 200."},
+    {"name": "AJAX filter/sort no-reload", "result": "PASS", "details": "On search-vehicles/property/second-hand: set window.__marker=1 & sidebar __flag='kept', changed sort select in .sh-main. URL changed via pushState, marker preserved (=1) and sidebar DOM node identity preserved (__flag='kept'). No full page reload."},
+    {"name": ".sh-cats-slider hidden + no errors", "result": "PASS", "details": "On all 4 listing pages (search-vehicles, property, second-hand, businesses): computed display of .sh-cats-slider = 'none'; .sh-sidebar visible; 0 console errors; no PHP warnings/notices/fatal errors in HTML."},
+    {"name": "Switzerland (CH) added", "result": "PASS", "details": "#ivCountrySelect first 9 real options order: Hollanda, Almanya, Belçika, Fransa, Avusturya, İsviçre, Danimarka, Türkiye, Polonya - matches expected. CH option present with text 'İsviçre'. Sidebar select[name=country_id] on search-vehicles also has 'İsviçre' option (value=13)."},
+    {"name": "Regression: /account.php redirect + login + jobs.php", "result": "PASS", "details": "/account.php while logged out redirects to /?auth=login. Login via modal (data-testid login-email/login-password/login-submit) with test@avrupapazari.com / Test12345! redirects to /account.php showing 'Test User'. /pages/jobs.php loads."}
+  ],
+  "test_report_links": [],
+  "action_items": [],
+  "critical_code_review_comments": [],
+  "updated_files": [],
+  "success_rate": {"backend": "N/A", "frontend": "100%"},
+  "test_credentials": "test@avrupapazari.com / Test12345! (worked)",
+  "seed_data_creation": "none",
+  "retest_needed": false,
+  "should_main_agent_self_test": false,
+  "context_for_next_testing_agent": "Iteration 2 verified this round's 4 fixes + regression smoke. Note: login modal has TWO forms in DOM (register + login), so use data-testid='login-email' / 'login-password' / 'login-submit' for the login form (plain input[type=email] first-match hits the hidden register form). Sidebar country_id uses numeric IDs (İsviçre=13), while ivCountrySelect uses ISO codes (CH). AJAX flow proven via preserved window.__marker + sidebar DOM property; do not rely on URL equality alone."
+}

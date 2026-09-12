@@ -533,7 +533,7 @@ include __DIR__ . '/../includes/header.php';
                         <input type="hidden" name="category_id" value="<?= $categoryId ?>">
                         <input type="hidden" name="country_id" value="<?= $countryId ?>">
                         <input type="hidden" name="city_id" value="<?= $cityId ?>">
-                        <select name="sort" onchange="this.form.submit()">
+                        <select name="sort">
                             <option value="featured" <?= $sort === 'featured' ? 'selected' : '' ?>><?= e($text('businesses.sort_featured', 'Featured first')) ?></option>
                             <option value="rating" <?= $sort === 'rating' ? 'selected' : '' ?>><?= e($text('businesses.sort_rating', 'Highest rated')) ?></option>
                         </select>
@@ -675,4 +675,5 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 </script>
 
+<script src="<?= asset('js/listing-ajax.js') ?>" defer></script>
 <?php include __DIR__ . '/../includes/footer.php'; ?>

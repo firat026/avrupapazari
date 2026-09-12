@@ -69,3 +69,8 @@ DROP TABLE IF EXISTS `listing_emlak_backup_20260827`;
 
 -- Vehicles first everywhere
 UPDATE `categories` SET `sort_order` = CASE `module` WHEN 'arac' THEN 1 WHEN 'emlak' THEN 2 WHEN 'ikinci_el' THEN 3 WHEN 'esnaf' THEN 4 WHEN 'jobs' THEN 5 END WHERE `parent_id` IS NULL;
+
+-- Switzerland added; country order NL, DE, BE, FR, AT, CH, DK, TR, PL
+INSERT INTO `countries` (`code`,`name_tr`,`name_nl`,`name_en`,`name_de`,`is_active`,`sort_order`)
+SELECT 'CH','İsviçre','Zwitserland','Switzerland','Schweiz',1,6 FROM DUAL WHERE NOT EXISTS (SELECT 1 FROM `countries` WHERE `code`='CH');
+UPDATE `countries` SET `is_active`=1, `sort_order` = CASE `code` WHEN 'NL' THEN 1 WHEN 'DE' THEN 2 WHEN 'BE' THEN 3 WHEN 'FR' THEN 4 WHEN 'AT' THEN 5 WHEN 'CH' THEN 6 WHEN 'DK' THEN 7 WHEN 'TR' THEN 8 WHEN 'PL' THEN 9 ELSE `sort_order` END;

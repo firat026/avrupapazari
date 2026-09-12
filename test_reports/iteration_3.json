@@ -1,0 +1,40 @@
+{
+  "summary": "Frontend-only testing of jobs.php rebuild + auth modal narrow-viewport CSS fix + regression. All structural/interaction requirements for jobs.php pass and the auth modal is fully contained on 380/500/1920 viewports. One integration issue found: /api/get-cities.php returns 404 in this preview because ingress routes /api/* to the FastAPI backend (port 8001) instead of the PHP server (port 3000), so the city dropdown does not populate.",
+  "backend_issues": {"critical": [], "minor": []},
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [
+      {
+        "flow": "Category sidebar city dropdown load (jobs.php and category.php?module=jobs)",
+        "issue": "GET /api/get-cities.php?country_id=1 returns 404 (FastAPI 'Not Found' JSON). The Kubernetes ingress routes any /api/* path to the FastAPI service on :8001, so the PHP script at /app/site/api/get-cities.php is unreachable via this URL from the preview domain. As a result, after selecting Hollanda the city select is enabled but only contains the 'Şehir' placeholder (0 real city options). A console/network error is produced. Spec required '>0 options via /api/get-cities.php (no console errors)'.",
+        "affected_selectors": ["[data-testid='filter-country']", "[data-testid='filter-city']"]
+      }
+    ],
+    "design_issues": []
+  },
+  "tests_executed": [
+    {"name": "GET /pages/jobs.php", "result": "PASS", "details": "200. data-testid='category-title' = 'İş ve İşçi İlanları'. data-testid='category-sidebar' present. First control in sidebar is [data-testid='filter-country']. [data-testid='filter-city'] disabled initially. Header nav-map href = '/pages/map.php?module=jobs'. Hero 'Haritada Ara' link href = '/pages/map.php?module=jobs'."},
+    {"name": "Country change AJAX (no reload)", "result": "PARTIAL", "details": "window.__m=1 preserved after selecting Hollanda (no page reload). URL updated via pushState to include country_id=1 (?sub=0&country_id=1&city_id=&q=). [data-testid='category-results'] present and [data-testid='category-empty'] rendered ('Henüz iş ilanı yok...'). HOWEVER: /api/get-cities.php?country_id=1 -> 404 (routed to FastAPI in preview), so city select only shows the 'Şehir' placeholder option (count=1, no real options). Console has a 404 network error."},
+    {"name": "Sort change AJAX (no reload)", "result": "PASS", "details": "Changing [data-testid='results-sort'] does not reload (window.__m preserved =1)."},
+    {"name": "/pages/category.php?module=jobs&q=test", "result": "PASS", "details": "HTTP 200."},
+    {"name": "/pages/jobs.php?country_id=1&sort=price_asc", "result": "PASS", "details": "HTTP 200. [data-testid='filter-country'].value = '1' (Hollanda preselected)."},
+    {"name": "Auth modal narrow viewport overflow", "result": "PASS", "details": "Viewport 500x900: card width=440 (right=462.5); all register-* inputs right<=429.5 (inside card). Viewport 380x800: card width=325; all inputs right=324 (inside card, width=283). No horizontal document overflow (scrollWidth<=clientWidth) at either size. 1920x1080: modal renders normally (centered, 440px wide, all inputs contained)."},
+    {"name": "Regression: / and /pages/search-vehicles.php", "result": "PASS", "details": "GET / => 200. GET /pages/search-vehicles.php => 200. .sh-cats-slider computed display:none / hidden."},
+    {"name": "Regression: login via modal", "result": "PASS", "details": "Open modal via [data-testid='join-button'], click 'Giriş Yap' tab, fill [data-testid='login-email']=test@avrupapazari.com, [data-testid='login-password']=Test12345!, click [data-testid='login-submit'] -> redirected to /account.php, page title 'Hesabım - AvrupaPazari', 'Test User' shown."}
+  ],
+  "test_report_links": [],
+  "action_items": [
+    "Fix /api/get-cities.php loading in the preview environment. Options: (a) change base_url path in /app/site/assets/js/category-filters.js and /app/site/pages/post-vehicle.php from '/api/get-cities.php' to a non-/api path served by the PHP app (e.g. '/ajax/get-cities.php' or '/get-cities.php'), OR (b) configure ingress to send /api/*.php to the PHP backend (port 3000) while keeping /api/* JSON routes on 8001. Without this, the sidebar city select on the new jobs.php (and category.php) cannot list cities."
+  ],
+  "critical_code_review_comments": [
+    "/app/site/assets/js/category-filters.js relies on '/api/get-cities.php' which collides with the ingress /api -> FastAPI routing on this deployment topology. Prefer a PHP-owned URL prefix (e.g. /ajax/…) for internal PHP AJAX endpoints to avoid ambiguous routing."
+  ],
+  "updated_files": [],
+  "success_rate": {"backend": "N/A", "frontend": "88% (7/8 checks fully green; 1 partial due to /api routing conflict)"},
+  "test_credentials": "test@avrupapazari.com / Test12345! (login worked, reached /account.php)",
+  "seed_data_creation": "none",
+  "retest_needed": true,
+  "should_main_agent_self_test": true,
+  "context_for_next_testing_agent": "jobs.php structural + AJAX-no-reload + auth-modal-narrow-viewport tests all pass. The only failing requirement is city dropdown population because /api/get-cities.php resolves to FastAPI (404) in the preview. This is an infra/routing conflict, not a jobs.php-specific bug — it will also affect any other PHP page using category-filters.js. Iteration_2 did not exercise the get-cities XHR so this went unnoticed. When retesting after main-agent fix, verify /api/get-cities.php?country_id=1 returns a JSON array and that selecting Hollanda populates >0 city options with no console errors.",
+  "rca of the issue": "Root cause: The frontend JS (/app/site/assets/js/category-filters.js line 12) calls fetch(base + '/api/get-cities.php?...') where base='' (site brand href is '/'), producing an absolute-path request to /api/get-cities.php on the preview origin. The Kubernetes ingress in this environment forwards every '/api/*' request to the FastAPI service on port 8001; the FastAPI app has no such route and returns HTTP 404 with body {\"detail\":\"Not Found\"}. The PHP file physically exists at /app/site/api/get-cities.php but is only reachable via the PHP server on :3000 for non-/api paths. Reproduction: open /pages/jobs.php, select country 'Hollanda' (value=1); DevTools Network shows /api/get-cities.php?country_id=1 -> 404; city select stays at only 'Şehir' placeholder. Mitigation: either change the JS/PHP callers to use a non-/api path (e.g. /ajax/get-cities.php) served by PHP, or add an ingress rewrite mapping /api/*.php to the PHP backend."
+}

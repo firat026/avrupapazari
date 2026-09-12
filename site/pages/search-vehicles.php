@@ -256,7 +256,7 @@ try {
                     <p><?= e($selectedCategory && $selectedCategory['description'] ? $selectedCategory['description'] : (t('second_hand.subtitle') ?: 'Binlerce ikinci el ve sıfır ürünü keşfet, güvenle al ve sat.')) ?></p>
                 </div>
                 <div class="sh-hero-actions">
-                    <a href="<?= e(BASE_URL) ?>/pages/map.php?module=ikinci_el<?= $categoryId ? '&category_id=' . $categoryId : '' ?>" class="sh-map-btn">
+                    <a href="<?= e(BASE_URL) ?>/pages/map.php?module=arac<?= $categoryId ? '&category_id=' . $categoryId : '' ?>" class="sh-map-btn">
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6"/><line x1="8" y1="2" x2="8" y2="18"/><line x1="16" y1="6" x2="16" y2="22"/></svg>
                         <span><?= e(t('nav.map_search') ?: 'Haritada Ara') ?></span>
                     </a>
@@ -439,7 +439,7 @@ try {
                             <?php if ($fuelType): ?><input type="hidden" name="fuel_type" value="<?= e($fuelType) ?>"><?php endif; ?>
                             <?php if ($transmission): ?><input type="hidden" name="transmission" value="<?= e($transmission) ?>"><?php endif; ?>
                             
-                            <select name="sort" onchange="this.form.submit()" aria-label="<?= e($label('sort', 'Sıralama')) ?>">
+                            <select name="sort" aria-label="<?= e($label('sort', 'Sıralama')) ?>">
                                 <option value="newest" <?= $sort === 'newest' ? 'selected' : '' ?>><?= e($label('common_sort_newest', 'En Yeni')) ?></option>
                                 <option value="oldest" <?= $sort === 'oldest' ? 'selected' : '' ?>><?= e($label('common_sort_oldest', 'En Eski')) ?></option>
                                 <option value="price_asc" <?= $sort === 'price_asc' ? 'selected' : '' ?>><?= e($label('common_sort_price_low', 'Fiyat: Düşükten Yükseğe')) ?></option>
@@ -614,4 +614,5 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 </script>
 
+<script src="<?= asset('js/listing-ajax.js') ?>" defer></script>
 <?php include __DIR__ . '/../includes/footer.php'; ?>

@@ -16,6 +16,10 @@ User (Turkish) uploaded their live cPanel site (PHP 8, MySQL, 4 langs) + SQL dum
 - Admin: fixed broken sidebar links, preview-listing parse error, listing.php double <head>.
 - Testing agent iteration_1: all pass; fixed cities.forEach guard afterwards.
 
+## Round 2 (2026-06-12, later)
+- Map link context (home=all, category page=?module=X; fixed wrong ikinci_el links), AJAX result-only updates on listing pages (assets/js/listing-ajax.js), chip strip hidden, Switzerland added (sql/02), jobs/category page rebuilt with sidebar (country top, cities via ajax/get-cities.php) + sort + pagination, auth modal narrow-screen overflow fixed, api/ renamed to ajax/ (preview ingress hijacks /api). Tests: iteration_2 & 3 pass.
+- Zip rebuilt: /app/deliverables/avrupapazari-v2.zip (download via <preview>/downloads/avrupapazari-v2.zip)
+
 ## Backlog
 - P1: Redesign inner pages (property/vehicles/second-hand/businesses/map) to new style + dark mode
 - P1: Move $featuresLabels in post-vehicle.php to DB

@@ -5,7 +5,7 @@ Zip içeriğini `public_html` içine yükleyin (mevcut dosyaların üzerine yaz�
 - `uploads/` klasörünüz sizde kalır; zip yalnızca `uploads/categories/` (yeni kategori görselleri) içerir.
 - Sunucudaki `uploads/esnaf` klasörünü `uploads/businesses` olarak **yeniden adlandırın** (SQL bunu bekler).
 - Artık kullanılmayan dosyaları sunucudan silin: `lang/`, `pages/home.php`, `pages/navigation.php`, `pages/check-users.php`,
-  `import-postcodes.php`, `api/set-theme.php`, `api/set-lang.php`, `assets/css/navigation.css`, `assets/css/esnaf-rehberi.css`,
+  `import-postcodes.php`, `api/` klasörü (artık `ajax/`), `assets/css/navigation.css`, `assets/css/esnaf-rehberi.css`,
   `assets/css/kategori.css`, `assets/css/mobile/`, tüm `error_log` dosyaları, `admin/pages/`.
 
 ## 2. config.php
@@ -18,6 +18,7 @@ Yetkili yönlendirme URI: `https://ALANADINIZ/auth/google-callback.php`. Boş b�
 1. `sql/01_translations.sql` — tüm arayüz metinleri (TR/NL/EN/DE), eski lang/*.php yerine
 2. `sql/02_schema_updates.sql` — İş İlanları kategorisi, kategori görselleri, statik sayfalar tablosu, sıralama (Araçlar önce)
 3. `sql/03_vehicle_form_translations.sql` — araç ilan formu metinleri
+4. `sql/04_category_filters.sql` — kategori/iş ilanları filtre metinleri
 
 Hepsi tekrar çalıştırılabilir (mevcut verinize zarar vermez).
 

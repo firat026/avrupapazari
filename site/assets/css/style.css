@@ -457,3 +457,9 @@ body {
   .category-nav-link { font-size: .78rem; padding: 9px 12px; }
   .category-nav-ad { min-width: 145px !important; padding: 0 14px !important; }
 }
+
+/* Listing pages: category chip strip removed (categories live in the sidebar); smooth result swaps */
+.sh-cats-slider { display: none !important; }
+.sh-main { transition: opacity .18s ease; }
+.sh-main.is-loading { opacity: .55; pointer-events: none; }
+.sh-card:hover, .sh-cat-card:hover, .biz-card:hover { transform: none !important; }

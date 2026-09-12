@@ -808,4 +808,5 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 </script>
 
+<script src="<?= asset('js/listing-ajax.js') ?>" defer></script>
 <?php include __DIR__ . '/../includes/footer.php'; ?>
