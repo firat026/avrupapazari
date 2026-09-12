@@ -1,8 +1,20 @@
 <?php
 declare(strict_types=1);
 
-// Site base path. Root install => ''. Sub folder install => '/subfolder' (no trailing slash).
-define('BASE_URL', '');
+// Site base path. Leave '' for auto-detect (works for root, sub folders and /~user URLs). Or set manually, e.g. '/subfolder'.
+$baseUrl = '';
+if ($baseUrl === '') {
+    $script = str_replace('\\', '/', (string)realpath((string)($_SERVER['SCRIPT_FILENAME'] ?? '')));
+    $root = str_replace('\\', '/', (string)realpath(__DIR__));
+    $name = (string)($_SERVER['SCRIPT_NAME'] ?? '');
+    if ($script !== '' && str_starts_with($script, $root)) {
+        $rel = substr($script, strlen($root));
+        if ($rel !== '' && str_ends_with($name, $rel)) {
+            $baseUrl = substr($name, 0, strlen($name) - strlen($rel));
+        }
+    }
+}
+define('BASE_URL', rtrim($baseUrl, '/'));
 
 // MySQL credentials (cPanel -> MySQL Databases)
 define('DB_HOST', 'localhost');
@@ -44,7 +56,7 @@ function getDB(): PDO
     } catch (PDOException $exception) {
         error_log($exception->getMessage());
         http_response_code(500);
-        exit('Database connection failed.');
+        exit('Database connection failed. Please check DB_HOST / DB_NAME / DB_USER / DB_PASS in config.php. (' . htmlspecialchars($exception->getMessage()) . ')');
     }
     return $pdo;
 }

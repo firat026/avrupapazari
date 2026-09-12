@@ -85,3 +85,9 @@ android-sdk/
 **/.emergent/recordings/
 upload/mysql_data/ib_logfile0
 upload/mysql_data/avrupa_db/postcodes.ibd
+.env
+.env.*
+*.env
+credentials.json
+*.key
+.credentials

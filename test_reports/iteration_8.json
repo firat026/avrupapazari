@@ -1,0 +1,37 @@
+{
+  "summary": "Verified BASE_URL auto-detect, url()/asset() prefixing, DB error message, and root-install regression + browser login. All 3 requested backend/CLI scenarios passed and the browser login flow completed successfully.",
+  "backend_issues": {"critical": [], "minor": []},
+  "frontend_issues": {"ui_bugs": [], "integration_issues": [], "design_issues": []},
+  "test_report_links": [],
+  "action_items": [],
+  "critical_code_review_comments": [],
+  "updated_files": [],
+  "success_rate": {"backend": "100%", "frontend": "100%"},
+  "test_credentials": "test@avrupapazari.com / Test12345! (from /app/memory/test_credentials.md)",
+  "seed_data_creation": "None. Used temp dirs /tmp/basetest and /tmp/cfgtest, both cleaned up. Killed the ad-hoc php -S :3222 process.",
+  "retest_needed": false,
+  "main_agent_can_self_test": true,
+  "context_for_next_testing_agent": "Sub-folder test steps: mkdir -p /tmp/basetest && cp -r /app/site /tmp/basetest/~avrupa && php -S 127.0.0.1:3222 -t /tmp/basetest &. Then curl /~avrupa/index.php (200), /~avrupa/pages/property.php (200), /~avrupa/auth/login.php (302 -> /~avrupa/?auth=login). All hrefs must be prefixed with /~avrupa/. DB-error test: copy config.php+functions.php+includes to /tmp/cfgtest, set DB_PASS='wrong', run `php -r 'require \"/tmp/cfgtest/functions.php\"; getDB();'` -> message contains 'Please check DB_HOST / DB_NAME / DB_USER / DB_PASS in config.php'.",
+  "detailed_results": {
+    "subfolder_simulation": {
+      "index_php": "HTTP 200",
+      "pages_property_php": "HTTP 200",
+      "login_redirect": "302 Location: /~avrupa/?auth=login",
+      "index_hrefs_starting_with_/~avrupa/": 61,
+      "property_hrefs_starting_with_/~avrupa/": 167,
+      "bad_root_prefixed_hrefs": 0
+    },
+    "root_install_regression": {
+      "url_tested": "https://modular-web-setup.preview.emergentagent.com",
+      "index": "HTTP 200",
+      "property": "HTTP 200",
+      "assets_prefixed_/assets/": 7,
+      "no_/~avrupa_prefixes": true,
+      "browser_login": "SUCCESS - redirected to /account.php with test@avrupapazari.com logged in (Test User visible, Çıkış Yap button present)"
+    },
+    "db_error_message": {
+      "output_contains_required_text": true,
+      "actual_output": "Database connection failed. Please check DB_HOST / DB_NAME / DB_USER / DB_PASS in config.php. (SQLSTATE[HY000] [1045] Access denied for user 'avrupa_pazari'@'localhost' (using password: YES))"
+    }
+  }
+}

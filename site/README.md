@@ -9,8 +9,8 @@ Zip içeriğini `public_html` içine yükleyin (mevcut dosyaların üzerine yaz�
   `assets/css/kategori.css`, `assets/css/mobile/`, tüm `error_log` dosyaları, `admin/pages/`.
 
 ## 2. config.php
-`DB_HOST / DB_NAME / DB_USER / DB_PASS` değerlerini cPanel MySQL bilgilerinizle doldurun.
-Site alt klasördeyse `BASE_URL` = `/klasor` (sonda `/` yok); kök dizinde ise `''` bırakın.
+`DB_HOST / DB_NAME / DB_USER / DB_PASS` eski sitenizdeki değerlerle hazır gelir; farklıysa güncelleyin.
+`BASE_URL` otomatik algılanır (kök, alt klasör, `/~kullanici/`).
 Google ile giriş için Google Cloud Console → OAuth Client oluşturup `GOOGLE_CLIENT_ID` ve `GOOGLE_CLIENT_SECRET` girin.
 Yetkili yönlendirme URI: `https://ALANADINIZ/auth/google-callback.php`. Boş bırakılırsa Google butonu görünmez.
 
