@@ -26,6 +26,9 @@ User (Turkish) uploaded their live cPanel site (PHP 8, MySQL, 4 langs) + SQL dum
 ## Round 4 (2026-06-12)
 - Header badges (favorites count, unread messages), messaging (ajax/send-message.php, messages.php inbox+thread, listing.php modal), job posting form pages/post-job.php (+listing_jobs table, post modal routes jobs there), inner pages restyled via assets/css/listing-pages.css (maps --sh-* vars -> site tokens, dark mode), homepage width fix (removed old .homepage rule from style.css, bigger type), FOUC fix (page CSS in head via $pageStyles, filemtime asset versions). sql/06_messages_jobs.sql. Tests iteration_5 (24/26 -> fixed) & iteration_6 pass. Zip rebuilt.
 
+## Round 5 (2026-06-12)
+- Session cookie SameSite=None;Secure on HTTPS (registration failed inside preview iframe). iteration_7 pass. Zip rebuilt.
+
 ## Backlog
 - P2: map.php restyle to new tokens
 - P1: Move $featuresLabels in post-vehicle.php to DB

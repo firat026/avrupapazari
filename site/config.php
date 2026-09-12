@@ -18,7 +18,9 @@ define('DEFAULT_LANG', 'tr');
 define('SUPPORTED_LANGS', ['tr', 'nl', 'en', 'de']);
 
 if (session_status() === PHP_SESSION_NONE) {
-    session_set_cookie_params(['lifetime' => 0, 'path' => '/', 'httponly' => true, 'samesite' => 'Lax']);
+    $secure = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') || ($_SERVER['HTTP_X_FORWARDED_PROTO'] ?? '') === 'https';
+    // SameSite=None (with Secure) keeps the session alive when the site is shown inside an iframe/preview.
+    session_set_cookie_params(['lifetime' => 0, 'path' => '/', 'httponly' => true, 'secure' => $secure, 'samesite' => $secure ? 'None' : 'Lax']);
     session_start();
 }
 
