@@ -19,6 +19,7 @@ Yetkili yönlendirme URI: `https://ALANADINIZ/auth/google-callback.php`. Boş b�
 2. `sql/02_schema_updates.sql` — İş İlanları kategorisi, kategori görselleri, statik sayfalar tablosu, sıralama (Araçlar önce)
 3. `sql/03_vehicle_form_translations.sql` — araç ilan formu metinleri
 4. `sql/04_category_filters.sql` — kategori/iş ilanları filtre metinleri
+5. `sql/05_favorites.sql` — favoriler metinleri
 
 Hepsi tekrar çalıştırılabilir (mevcut verinize zarar vermez).
 

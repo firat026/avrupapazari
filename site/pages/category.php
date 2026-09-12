@@ -140,7 +140,7 @@ include __DIR__ . '/../includes/header.php';
       <div class="listing-grid three">
         <?php foreach ($items as $item): ?>
         <a href="<?= url('pages/listing.php?slug=' . rawurlencode((string)$item['slug'])) ?>" class="listing-card">
-          <div class="listing-media"><?php if ($item['image']): ?><img src="<?= e(imageUrl($item['image'])) ?>" alt="" loading="lazy"><?php else: ?><span class="no-image"><?= e(t('listing.no_image')) ?></span><?php endif; ?><?php if ((int)$item['is_premium']): ?><span class="chip chip-gold"><?= e(t('common.premium')) ?></span><?php endif; ?></div>
+          <div class="listing-media"><?php if ($item['image']): ?><img src="<?= e(imageUrl($item['image'])) ?>" alt="" loading="lazy"><?php else: ?><span class="no-image"><?= e(t('listing.no_image')) ?></span><?php endif; ?><?php if ((int)$item['is_premium']): ?><span class="chip chip-gold"><?= e(t('common.premium')) ?></span><?php endif; ?><?= favoriteButton((int)$item['id']) ?></div>
           <div class="listing-body">
             <div class="listing-price"><?= e(formatPrice($item['price'])) ?></div>
             <h3><?= e($item['title']) ?></h3>

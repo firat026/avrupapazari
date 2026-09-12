@@ -20,8 +20,12 @@ User (Turkish) uploaded their live cPanel site (PHP 8, MySQL, 4 langs) + SQL dum
 - Map link context (home=all, category page=?module=X; fixed wrong ikinci_el links), AJAX result-only updates on listing pages (assets/js/listing-ajax.js), chip strip hidden, Switzerland added (sql/02), jobs/category page rebuilt with sidebar (country top, cities via ajax/get-cities.php) + sort + pagination, auth modal narrow-screen overflow fixed, api/ renamed to ajax/ (preview ingress hijacks /api). Tests: iteration_2 & 3 pass.
 - Zip rebuilt: /app/deliverables/avrupapazari-v2.zip (download via <preview>/downloads/avrupapazari-v2.zip)
 
+## Round 3 (2026-06-12)
+- Favorites: ajax/toggle-favorite.php, favoriteButton() on cards (home/category/account), listing.php #favBtn rewired, account.php 'Favorilerim' section, header menu link, sql/05_favorites.sql. Tests iteration_4 pass. Zip rebuilt.
+
 ## Backlog
 - P1: Redesign inner pages (property/vehicles/second-hand/businesses/map) to new style + dark mode
 - P1: Move $featuresLabels in post-vehicle.php to DB
-- P2: Admin UI English/translations, admin pages for static_pages & translations editing
+- P2: Admin UI English/translations
+- P2: Jobs posting form in post modal, admin pages for static_pages & translations editing
 - P2: Google OAuth live test once client id provided

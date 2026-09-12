@@ -101,3 +101,25 @@ function isActivePage(string $page): bool
 {
     return basename($_SERVER['SCRIPT_NAME'] ?? '') === $page;
 }
+
+function userFavoriteIds(): array
+{
+    static $ids = null;
+    if ($ids !== null) {
+        return $ids;
+    }
+    $ids = [];
+    $user = currentUser();
+    if ($user) {
+        $stmt = getDB()->prepare('SELECT listing_id FROM favorites WHERE user_id = ?');
+        $stmt->execute([(int)$user['id']]);
+        $ids = array_map('intval', $stmt->fetchAll(PDO::FETCH_COLUMN));
+    }
+    return $ids;
+}
+
+function favoriteButton(int $listingId): string
+{
+    $active = in_array($listingId, userFavoriteIds(), true);
+    return '<button type="button" class="fav-btn' . ($active ? ' active' : '') . '" data-fav="' . $listingId . '" aria-pressed="' . ($active ? 'true' : 'false') . '" aria-label="' . e(t('listing.add_favorite')) . '" data-testid="fav-btn-' . $listingId . '"><svg viewBox="0 0 24 24"><path d="M12 20.5s-7.5-4.6-7.5-10A4.5 4.5 0 0 1 12 8a4.5 4.5 0 0 1 7.5 2.5c0 5.4-7.5 10-7.5 10Z"/></svg></button>';
+}

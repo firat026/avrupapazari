@@ -323,10 +323,10 @@ document.addEventListener('keydown', function(e) {
 document.getElementById('lightbox').addEventListener('click', function(e) { if (e.target === this) closeLightbox(); });
 
 function toggleFav() {
-    fetch('<?= BASE_URL ?>/pages/search-vehicles.php', { method:'POST', headers:{'Content-Type':'application/x-www-form-urlencoded'}, body:'toggle_favorite=1&listing_id=<?=$item['id']?>' })
+    fetch('<?= BASE_URL ?>/ajax/toggle-favorite.php', { method:'POST', headers:{'Content-Type':'application/x-www-form-urlencoded'}, credentials:'same-origin', body:'listing_id=<?=$item['id']?>' })
     .then(function(r){return r.json();}).then(function(data){
         var btn=document.getElementById('favBtn'),txt=document.getElementById('favText');
-        if(data.status==='login_required'){window.location='<?= BASE_URL ?>/?auth=login';return;}
+        if(data.status==='login_required'){if(window.openAuth)window.openAuth('login');else window.location='<?= BASE_URL ?>/?auth=login';return;}
         if(data.status==='added'){btn.classList.add('active');btn.querySelector('svg').setAttribute('fill','currentColor');txt.textContent=LANG_SAVED;}
         else{btn.classList.remove('active');btn.querySelector('svg').setAttribute('fill','none');txt.textContent=LANG_ADD_FAV;}
     });

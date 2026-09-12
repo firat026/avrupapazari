@@ -78,6 +78,28 @@
 
   window.openAuth = openAuth;
 
+  // Favorites (heart buttons on cards)
+  document.addEventListener('click', function (e) {
+    var btn = e.target.closest('[data-fav]');
+    if (!btn) return;
+    e.preventDefault(); e.stopPropagation();
+    if (!window.SITE_USER) { openAuth('login'); return; }
+    var base = document.querySelector('.site-header .brand').getAttribute('href').replace(/\/$/, '');
+    btn.disabled = true;
+    fetch(base + '/ajax/toggle-favorite.php', { method: 'POST', credentials: 'same-origin', headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, body: 'listing_id=' + encodeURIComponent(btn.dataset.fav) })
+      .then(function (r) { return r.json(); })
+      .then(function (data) {
+        if (data.status === 'login_required') { openAuth('login'); return; }
+        var on = data.status === 'added';
+        btn.classList.toggle('active', on);
+        btn.setAttribute('aria-pressed', on ? 'true' : 'false');
+        var card = btn.closest('[data-fav-card]');
+        if (card && !on) card.remove();
+      })
+      .catch(function () {})
+      .then(function () { btn.disabled = false; });
+  });
+
   // Scroll to top
   var top = document.getElementById('scrollTop');
   if (top) {

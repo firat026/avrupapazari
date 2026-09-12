@@ -92,6 +92,7 @@ $langNames = ['tr' => 'Türkçe', 'nl' => 'Nederlands', 'en' => 'English', 'de' 
           <div class="dropdown-menu">
             <a href="<?= url('account.php') ?>" class="dropdown-item" data-testid="menu-account"><?= e(t('nav.my_account')) ?></a>
             <a href="<?= url('account.php#listings') ?>" class="dropdown-item"><?= e(t('nav.my_listings')) ?></a>
+            <a href="<?= url('account.php#favorites') ?>" class="dropdown-item" data-testid="menu-favorites"><?= e(t('account.favorites')) ?></a>
             <a href="<?= url('auth/logout.php') ?>" class="dropdown-item danger" data-testid="menu-logout"><?= e(t('nav.logout')) ?></a>
           </div>
         </div>
