@@ -46,7 +46,6 @@ if (empty($items)) $items = $LISTINGS; // gösteri için fallback
       </div>
     </section>
   </main>
-  <a href="#" class="fab-post">+ <?= t('post_ad') ?></a>
   <?php require __DIR__ . '/../includes/footer.php'; ?>
   <script src="../assets/js/script.js"></script>
 </body>

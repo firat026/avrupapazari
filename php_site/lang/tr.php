@@ -11,6 +11,8 @@ return [
     'register' => 'Kayıt Ol',
     'login' => 'Giriş Yap',
     'post_ad' => 'İlan Ver',
+    'search' => 'Ara',
+    'search_placeholder' => 'Ne arıyorsunuz? Örn: BMW, daire, iPhone...',
     'popular_category' => 'Popüler Kategori',
     'new' => 'YENİ',
     'ads' => 'ilan',

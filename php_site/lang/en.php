@@ -11,6 +11,8 @@ return [
     'register' => 'Sign Up',
     'login' => 'Login',
     'post_ad' => 'Post Ad',
+    'search' => 'Search',
+    'search_placeholder' => 'What are you looking for? e.g. BMW, apartment, iPhone...',
     'popular_category' => 'Popular Category',
     'new' => 'NEW',
     'ads' => 'ads',
