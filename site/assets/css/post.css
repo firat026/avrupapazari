@@ -1,0 +1,17 @@
+.post-page { max-width: 960px; margin: 40px auto 0; padding: 0 24px; }
+.post-head { text-align: center; margin-bottom: 32px; }
+.post-head .eyebrow { display: block; font-size: .72rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--accent); margin-bottom: 8px; }
+.post-head h1 { margin: 0 0 8px; font-family: 'Space Grotesk', sans-serif; font-size: clamp(1.7rem, 3vw, 2.3rem); letter-spacing: -0.03em; }
+.post-head p { margin: 0; color: var(--text-2); }
+.post-login { margin-top: 14px !important; padding: 10px 16px; display: inline-block; border-radius: 10px; background: var(--accent-light); color: var(--accent) !important; font-size: .88rem; }
+.post-login a { color: var(--accent); font-weight: 700; }
+.post-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+.post-card { display: grid; gap: 6px; padding: 26px 24px; border-radius: 20px; border: 1px solid var(--border); background: var(--surface); text-decoration: none; color: var(--text); transition: border-color .25s, box-shadow .25s; }
+.post-card:not(.disabled):hover { border-color: var(--accent); box-shadow: 0 0 30px -8px var(--accent); }
+.post-card.disabled { opacity: .55; cursor: not-allowed; }
+.post-icon { width: 50px; height: 50px; border-radius: 14px; display: flex; align-items: center; justify-content: center; background: var(--accent-light); color: var(--accent); margin-bottom: 8px; }
+.post-icon svg { width: 24px; height: 24px; }
+.post-name { font-weight: 700; font-size: 1.05rem; }
+.post-desc { color: var(--text-3); font-size: .84rem; line-height: 1.5; }
+@media (max-width: 760px) { .post-grid { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 480px) { .post-grid { grid-template-columns: 1fr; } }

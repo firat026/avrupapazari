@@ -1,0 +1,12 @@
+.business-page { max-width: 960px; margin: 28px auto 0; padding: 0 24px; }
+.back-link { margin-bottom: 16px; }
+.business-hero { display: flex; align-items: center; gap: 24px; padding: 30px 32px; background: var(--surface); border: 1px solid var(--border); border-radius: 24px; box-shadow: 0 20px 50px -30px var(--card-shadow-hover); }
+.business-avatar.large { width: 96px; height: 96px; border-radius: 26px; font-size: 2rem; margin: 0; flex: none; }
+.business-info h1 { margin: 4px 0 6px; font-family: 'Space Grotesk', sans-serif; font-size: 1.7rem; letter-spacing: -0.03em; }
+.business-location { margin: 0 0 6px; color: var(--text-2); font-size: .92rem; }
+.business-contact { margin-left: auto; display: grid; gap: 8px; justify-items: stretch; }
+.business-contact a { text-decoration: none; justify-content: center; }
+.business-about { margin-top: 24px; padding: 28px 32px; background: var(--surface); border: 1px solid var(--border); border-radius: 22px; }
+.business-about h2 { margin: 0 0 10px; font-size: 1.1rem; }
+.business-about p { margin: 0; color: var(--text-2); line-height: 1.7; }
+@media (max-width: 760px) { .business-hero { flex-wrap: wrap; } .business-contact { margin-left: 0; width: 100%; } }

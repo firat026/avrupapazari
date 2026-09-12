@@ -1,0 +1,69 @@
+/* Post-ad modal (category -> country/city -> NL plate lookup via RDW) */
+.iv-overlay{display:none;position:fixed;inset:0;background:rgba(10,20,15,.65);backdrop-filter:blur(4px);z-index:9999;align-items:center;justify-content:center;padding:20px}
+.iv-overlay.show{display:flex}
+.iv-modal{background:var(--surface,#fff);border-radius:24px;width:100%;max-width:720px;max-height:90vh;overflow-y:auto;box-shadow:0 32px 100px rgba(0,0,0,.25);animation:ivUp .3s cubic-bezier(.16,1,.3,1)}
+@keyframes ivUp{from{opacity:0;transform:translateY(24px) scale(.97)}to{opacity:1;transform:translateY(0) scale(1)}}
+.iv-header{padding:28px 32px 20px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--border,#e8f0ec)}
+.iv-title{font-size:1.3rem;font-weight:800;color:var(--text,#1a3a2a)}
+.iv-close{width:40px;height:40px;border-radius:50%;border:none;background:var(--surface-2,#f0f4f2);color:var(--text-2,#5a7a68);cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .15s}
+.iv-close:hover{background:var(--border,#e0e8e4)}
+.iv-close svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:2}
+.iv-body{padding:28px 32px 32px}
+.iv-steps{display:flex;gap:8px;margin-bottom:28px}
+.iv-step-dot{flex:1;height:5px;border-radius:3px;background:var(--border,#e0e8e4);transition:background .3s}
+.iv-step-dot.active{background:#1d7a4e}
+.iv-back{display:none;align-items:center;gap:6px;padding:8px 14px;border-radius:8px;border:none;background:var(--surface-2,#f0f4f2);color:var(--text-2,#4a6b58);font-size:.82rem;font-weight:600;cursor:pointer;margin-bottom:18px;transition:background .15s}
+.iv-back:hover{background:var(--border,#e0e8e4)}
+.iv-back.show{display:inline-flex}
+.iv-back svg{width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:2}
+.iv-cat-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+.iv-cat-item{display:flex;align-items:center;gap:14px;padding:20px;border-radius:14px;border:2px solid var(--border,#e8f0ec);background:var(--surface,#fff);cursor:pointer;transition:all .15s cubic-bezier(.16,1,.3,1)}
+.iv-cat-item:hover{border-color:#1d7a4e;background:#f0faf4;transform:translateY(-1px)}
+.iv-cat-item.selected{border-color:#1d7a4e;background:#e8f5ee}
+.iv-cat-icon{width:48px;height:48px;border-radius:12px;background:linear-gradient(135deg,#e8f5ee,#d4edde);display:flex;align-items:center;justify-content:center;color:#1d7a4e;flex-shrink:0}
+.iv-cat-item.selected .iv-cat-icon{background:linear-gradient(135deg,#1d7a4e,#2da065);color:#fff}
+.iv-cat-name{font-size:.92rem;font-weight:700;color:var(--text,#1a3a2a)}
+.iv-select{width:100%;height:52px;border:2px solid var(--border,#e0e8e4);border-radius:12px;padding:0 16px;font-size:.9rem;font-weight:600;color:var(--text,#1a3a2a);background:var(--surface,#fff);outline:none;cursor:pointer;margin-bottom:16px;transition:border-color .15s;appearance:auto}
+.iv-select:focus{border-color:#1d7a4e}
+.iv-label{font-size:.78rem;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:var(--text-3,#7a9b88);margin-bottom:8px;display:block}
+.iv-plaka-section{display:none;margin-top:20px;padding:24px;border-radius:16px;background:var(--surface-2,#f6faf8);border:1px solid var(--border,#e8f0ec)}
+.iv-plaka-section.show{display:block;animation:ivUp .3s cubic-bezier(.16,1,.3,1)}
+.iv-plaka-title{font-size:.95rem;font-weight:700;color:var(--text,#1a3a2a);margin-bottom:6px}
+.iv-plaka-desc{font-size:.8rem;color:var(--text-3,#7a9b88);margin-bottom:16px}
+.iv-plaka-box{display:flex;align-items:stretch;border-radius:12px;overflow:hidden;border:3px solid #f5c518;background:#f5c518;box-shadow:0 4px 16px rgba(245,197,24,.2)}
+.iv-plaka-flag{width:48px;background:#003da5;display:flex;flex-direction:column;align-items:center;justify-content:center;color:#fff;font-size:.7rem;font-weight:700;gap:2px;padding:8px 0}
+.iv-plaka-flag-stars{font-size:.55rem;color:#f5c518}
+.iv-plaka-input{flex:1;border:none;outline:none;font-size:1.8rem;font-weight:900;font-family:'Space Grotesk',monospace;text-transform:uppercase;padding:14px 20px;letter-spacing:3px;color:#1a1a1a;background:#f5c518}
+.iv-plaka-input::placeholder{color:rgba(0,0,0,.25);font-weight:500;letter-spacing:0;font-size:.9rem}
+.iv-plaka-actions{display:flex;gap:10px;margin-top:14px}
+.iv-plaka-btn{flex:1;padding:14px 24px;background:#1d7a4e;color:#fff;border:none;border-radius:10px;font-weight:700;font-size:.88rem;cursor:pointer;transition:background .15s}
+.iv-plaka-btn:hover{background:#156b42}
+.iv-plaka-btn:disabled{background:#b8d4c4;cursor:not-allowed}
+.iv-plaka-skip{flex:0;padding:14px 20px;background:var(--surface,#fff);color:var(--text-2,#4a6b58);border:2px solid var(--border,#e0e8e4);border-radius:10px;font-weight:600;font-size:.84rem;cursor:pointer;transition:border-color .15s;white-space:nowrap}
+.iv-plaka-skip:hover{border-color:#1d7a4e}
+.iv-loading{display:none;text-align:center;padding:16px;color:var(--text-3);font-size:.84rem}
+.iv-loading.show{display:block}
+.iv-spinner{display:inline-block;width:18px;height:18px;border:2px solid #e0e8e4;border-top-color:#1d7a4e;border-radius:50%;animation:spin .6s linear infinite;margin-right:8px;vertical-align:middle}
+@keyframes spin{to{transform:rotate(360deg)}}
+.iv-plaka-error{margin-top:12px;padding:12px 16px;border-radius:10px;background:#fef2f2;border:1px solid #fca5a5;color:#dc2626;font-size:.82rem;display:none}
+.iv-plaka-error.show{display:block}
+.iv-plaka-result{margin-top:20px;display:none}
+.iv-plaka-result.show{display:block;animation:ivUp .25s cubic-bezier(.16,1,.3,1)}
+.iv-car-card{padding:24px;border-radius:14px;background:var(--surface,#fff);border:2px solid #1d7a4e}
+.iv-car-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;padding-bottom:14px;border-bottom:1px solid var(--border,#e8f0ec)}
+.iv-car-title{font-size:1.15rem;font-weight:800;color:var(--text,#1a3a2a)}
+.iv-car-badge{padding:4px 10px;border-radius:6px;background:#e8f5ee;color:#1d7a4e;font-size:.7rem;font-weight:700;text-transform:uppercase}
+.iv-car-specs{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.iv-car-spec{padding:12px;border-radius:10px;background:var(--surface-2,#f8fdfb);border:1px solid var(--border,#e8f0ec)}
+.iv-car-spec-label{font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:var(--text-3,#7a9b88);margin-bottom:4px}
+.iv-car-spec-value{font-size:.9rem;font-weight:700;color:var(--text,#1a3a2a)}
+.iv-continue{width:100%;padding:16px;background:#1d7a4e;color:#fff;border:none;border-radius:12px;font-size:.92rem;font-weight:700;cursor:pointer;margin-top:24px;display:none;transition:all .15s}
+.iv-continue.show{display:block}
+.iv-continue:hover{background:#156b42;transform:translateY(-1px)}
+.iv-cat-grid{grid-template-columns:1fr}
+.iv-car-specs{grid-template-columns:repeat(2,1fr)}
+.iv-modal{border-radius:16px}
+.iv-body{padding:20px}
+.iv-cat-item:hover{transform:none}
+.iv-continue:hover{transform:none}
+@media(max-width:768px){.iv-cat-grid{grid-template-columns:1fr}.iv-car-specs{grid-template-columns:repeat(2,1fr)}.iv-modal{border-radius:16px}.iv-body{padding:20px}}

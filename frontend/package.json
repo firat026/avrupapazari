@@ -61,7 +61,7 @@
     "zod": "3.24.4"
   },
   "scripts": {
-    "start": "php -S 0.0.0.0:${PORT:-3000} -t /app/php_site /app/php_site/router.php",
+    "start": "php -S 0.0.0.0:${PORT:-3000} -t /app/site /app/site/router.php",
     "build": "craco build",
     "test": "craco test"
   },

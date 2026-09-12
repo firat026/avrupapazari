@@ -83,3 +83,5 @@ android-sdk/
 
 # overlay black-box crash/user-report dumps — session data, never history
 **/.emergent/recordings/
+upload/mysql_data/ib_logfile0
+upload/mysql_data/avrupa_db/postcodes.ibd

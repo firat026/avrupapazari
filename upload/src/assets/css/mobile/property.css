@@ -1,0 +1,19 @@
+/* Mobile-only rules live here by design. Desktop property.css stays media-query free. */
+@media(max-width:800px){.property-grid{grid-template-columns:repeat(2,1fr)}.property-filter{grid-template-columns:1fr 1fr}.property-filter input:first-of-type{grid-column:1/-1}}
+@media(max-width:600px){.property-hero{padding:34px 16px 0}.property-hero h1{font-size:42px}.property-location{width:min(380px,100%);margin-top:17px}.property-transaction-tabs{margin-top:10px}.property-main{padding:30px 18px 0}.property-subcategories{grid-template-columns:1fr}.property-filter{grid-template-columns:1fr}.property-filter input:first-of-type{grid-column:auto}.property-grid{gap:23px 11px}}
+@media(max-width:600px){.property-location{width:calc(100vw - 36px);max-width:380px}.property-location-field strong{font-size:13px}.property-location-field small{font-size:12px}.property-transaction-tabs{width:min(292px,calc(100vw - 36px))}.property-transaction-tabs a{font-size:14px}.property-hero p{max-width:34ch;font-size:14px}}
+@media(max-width:800px){.property-filter{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:600px){.property-hero{padding-bottom:0}.property-transaction-tabs{margin-top:20px}.property-filter{grid-template-columns:1fr}}
+.property-category-tabs{width:min(292px,calc(100vw - 36px));margin:0 auto 0}
+.property-category-tabs a{font-size:12px}
+/* Mobile keeps the same fixed dimensions and does not reflow when a tab becomes active. */
+.property-transaction-tabs a,
+.property-category-tabs a{font-weight:500;white-space:nowrap;line-height:1}
+.property-transaction-tabs a.active,
+.property-category-tabs a.active{font-weight:500;color:var(--property-green)}
+/* Keep mobile controls identical in geometry and prevent active-state reflow. */
+.property-transaction-tabs,.property-category-tabs{width:min(292px,calc(100vw - 36px));height:40px}
+.property-transaction-tabs a,.property-category-tabs a{font-weight:500;white-space:nowrap;line-height:1}
+.property-transaction-tabs a.active,.property-category-tabs a.active{font-weight:500;color:var(--property-green)}
+.property-transaction-tabs a+a,
+.property-category-tabs a+a{border-left:0}

@@ -1,0 +1,15 @@
+.static-page { max-width: 860px; margin: 40px auto 0; padding: 0 24px; }
+.static-card { background: var(--surface); border: 1px solid var(--border); border-radius: 22px; padding: 44px 48px; box-shadow: 0 20px 50px -30px var(--card-shadow-hover); }
+.static-card .eyebrow { display: block; font-size: .72rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--accent); margin-bottom: 10px; }
+.static-card h1 { margin: 0 0 24px; font-family: 'Space Grotesk', sans-serif; font-size: clamp(1.6rem, 3vw, 2.2rem); letter-spacing: -0.03em; }
+.static-content { color: var(--text-2); font-size: 1rem; line-height: 1.75; }
+.static-content p { margin: 0 0 16px; }
+.static-content a { color: var(--accent); }
+.static-content h2, .static-content h3 { color: var(--text); margin: 28px 0 10px; font-family: 'Space Grotesk', sans-serif; }
+.static-updated { margin: 28px 0 0; padding-top: 18px; border-top: 1px solid var(--border); font-size: .8rem; color: var(--text-3); }
+.error-page { max-width: 640px; margin: 80px auto 0; padding: 0 24px; text-align: center; }
+.error-code { font-family: 'Space Grotesk', sans-serif; font-size: 6rem; font-weight: 700; letter-spacing: -0.06em; color: var(--accent); line-height: 1; text-shadow: 0 0 40px var(--accent-light); }
+.error-page h1 { margin: 10px 0 8px; font-size: 1.6rem; }
+.error-page p { color: var(--text-2); margin: 0 0 24px; }
+.error-page .btn-primary { display: inline-flex; }
+@media (max-width: 640px) { .static-card { padding: 28px 22px; } }
