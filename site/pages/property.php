@@ -215,6 +215,7 @@ function getPropertyImage(array $item): string {
 }
 
 $pageTitle = ($selectedCategory ? $selectedCategory['name'] . ' - ' : '') . (t('property.title') ?: (t('nav.property') ?: 'Emlak İlanları'));
+$pageStyles = ['property.css', 'listing-pages.css'];
 include __DIR__ . '/../includes/header.php';
 ?>
 <script>
@@ -227,7 +228,6 @@ include __DIR__ . '/../includes/header.php';
     } catch (e) {}
 })();
 </script>
-<link rel="stylesheet" href="<?= e(BASE_URL) ?>/assets/css/property.css?v=5">
 
 <main class="sh-page">
     <!-- Breadcrumb & Top Bar -->

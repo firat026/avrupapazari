@@ -305,9 +305,9 @@ if ($isAjax) {
 }
 
 $pageTitle = ($selectedCategory ? $selectedCategory['name'] . ' - ' : '') . $label('second_hand', 'second_hand');
+$pageStyles = ['second-hand.css', 'listing-pages.css'];
 include __DIR__ . '/../includes/header.php';
 ?>
-<link rel="stylesheet" href="<?= e(BASE_URL) ?>/assets/css/second-hand.css?v=6">
 
 <main class="sh-page">
     <div class="sh-container">

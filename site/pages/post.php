@@ -7,7 +7,7 @@ $lang = currentLang();
 $stmt = getDB()->prepare("SELECT c.id, c.module, c.icon, COALESCE(ct.name, en.name, c.slug) AS name, COALESCE(ct.description, en.description, '') AS description FROM categories c LEFT JOIN category_translations ct ON ct.category_id = c.id AND ct.lang = ? LEFT JOIN category_translations en ON en.category_id = c.id AND en.lang = 'en' WHERE c.is_active = 1 AND c.parent_id IS NULL ORDER BY c.sort_order ASC");
 $stmt->execute([$lang]);
 $categories = $stmt->fetchAll();
-$targets = ['arac' => url('pages/post-vehicle.php')];
+$targets = ['arac' => url('pages/post-vehicle.php'), 'jobs' => url('pages/post-job.php')];
 
 $pageTitle = t('post.title') . ' - ' . setting('site_name', 'AvrupaPazari');
 $pageStyles = ['post.css'];

@@ -26,6 +26,15 @@ $navIcons = [
 $pageByModule = ['arac' => 'search-vehicles.php', 'emlak' => 'property.php', 'ikinci_el' => 'second-hand.php', 'esnaf' => 'businesses.php', 'jobs' => 'jobs.php'];
 $currentModule = array_search($currentScript, $pageByModule, true);
 $mapHref = url('pages/map.php') . ($currentModule ? '?module=' . $currentModule : '');
+$favCount = 0; $unreadCount = 0;
+if ($user) {
+    $favCount = count(userFavoriteIds());
+    try {
+        $q = getDB()->prepare('SELECT COUNT(*) FROM messages m JOIN conversations c ON c.id = m.conversation_id WHERE m.is_read = 0 AND m.sender_id <> ? AND (c.sender_id = ? OR c.receiver_id = ?)');
+        $q->execute([(int)$user['id'], (int)$user['id'], (int)$user['id']]);
+        $unreadCount = (int)$q->fetchColumn();
+    } catch (Throwable $e) {}
+}
 $langNames = ['tr' => 'Türkçe', 'nl' => 'Nederlands', 'en' => 'English', 'de' => 'Deutsch'];
 ?>
 <!DOCTYPE html>
@@ -87,12 +96,15 @@ $langNames = ['tr' => 'Türkçe', 'nl' => 'Nederlands', 'en' => 'English', 'de' 
           <button type="button" class="pill-btn dropdown-toggle" data-testid="user-menu-toggle">
             <span class="avatar"><?= e(mb_strtoupper(mb_substr((string)$user['first_name'], 0, 1))) ?></span>
             <span class="user-name"><?= e($user['first_name']) ?></span>
+            <?php if ($favCount): ?><span class="badge badge-fav" title="<?= e(t('account.favorites')) ?>" data-testid="fav-count-badge"><svg viewBox="0 0 24 24"><path d="M12 20.5s-7.5-4.6-7.5-10A4.5 4.5 0 0 1 12 8a4.5 4.5 0 0 1 7.5 2.5c0 5.4-7.5 10-7.5 10Z"/></svg><?= $favCount ?></span><?php endif; ?>
+            <?php if ($unreadCount): ?><span class="badge badge-msg" data-testid="unread-count-badge"><?= $unreadCount ?></span><?php endif; ?>
             <svg class="chev" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></svg>
           </button>
           <div class="dropdown-menu">
             <a href="<?= url('account.php') ?>" class="dropdown-item" data-testid="menu-account"><?= e(t('nav.my_account')) ?></a>
             <a href="<?= url('account.php#listings') ?>" class="dropdown-item"><?= e(t('nav.my_listings')) ?></a>
-            <a href="<?= url('account.php#favorites') ?>" class="dropdown-item" data-testid="menu-favorites"><?= e(t('account.favorites')) ?></a>
+            <a href="<?= url('account.php#favorites') ?>" class="dropdown-item" data-testid="menu-favorites"><?= e(t('account.favorites')) ?><?php if ($favCount): ?><span class="menu-count"><?= $favCount ?></span><?php endif; ?></a>
+            <a href="<?= url('messages.php') ?>" class="dropdown-item" data-testid="menu-messages"><?= e(t('msg.title')) ?><?php if ($unreadCount): ?><span class="menu-count hot"><?= $unreadCount ?></span><?php endif; ?></a>
             <a href="<?= url('auth/logout.php') ?>" class="dropdown-item danger" data-testid="menu-logout"><?= e(t('nav.logout')) ?></a>
           </div>
         </div>

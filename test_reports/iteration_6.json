@@ -1,0 +1,39 @@
+{
+  "summary": "Frontend-only smoke re-test after FOUC/jump fix. Verified CSS-in-head + versioning for 4 category pages via curl, no layout shift on nav clicks in browser, job listing detail h1.ld-title fix, post-job novalidate + server-side errors panel, home rendering, and theme toggle on property.php. All requested checks pass.",
+  "backend_issues": {"critical": [], "minor": []},
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": []
+  },
+  "tests_performed": {
+    "css_in_head_curl": {
+      "search-vehicles.php": "8 links, all in <head>, 0 after </head>, 0 after <body>; search-vehicles.css?v=1789205825 200; listing-pages.css?v=1789210059 200",
+      "property.php": "8 links, all in <head>; property.css?v=1789207084 200; listing-pages.css 200",
+      "second-hand.php": "8 links, all in <head>; second-hand.css?v=1789205825 200",
+      "businesses.php": "8 links, all in <head>; businesses.css?v=1789207084 200",
+      "note": "All page stylesheet URLs include ?v=<digits>; every stylesheet returns 200."
+    },
+    "no_layout_shift_browser": {
+      "nav-emlak": ".sh-layout top y=384 immediately after DOMContentLoaded AND after 1500ms (equal). 0 console errors, 0 failed requests.",
+      "nav-arac": ".sh-layout top y=384 immediately after DOMContentLoaded AND after 1500ms (equal). 0 console errors, 0 failed requests."
+    },
+    "job_listing_detail": "First card 'Test Garson Arıyorum' -> /pages/listing.php?slug=test-garson-ariyorum-cf858a -> h1.ld-title exactly 'Test Garson Arıyorum' (non-empty, matches card).",
+    "post_job_validation": "Logged in as test@avrupapazari.com; POSTed empty form via [data-testid=job-submit]; page returned 200 with [data-testid=job-errors] visible containing 'İlan Başlığı: Zorunlu alan | Sektör: Zorunlu alan | Ülke: Zorunlu alan | Açıklama: Zorunlu alan'. No native browser tooltip shown (novalidate honored).",
+    "regression_smoke": {
+      "home": "/ 200, h1[data-testid=home-title]='Avrupa'daki Türk topluluğunun pazar yeri' visible.",
+      "theme_toggle_property": "before data-theme=light bg=rgb(247,250,248); after click data-theme=dark bg=rgb(15,26,20). Working."
+    }
+  },
+  "test_report_links": [],
+  "action_items": [],
+  "critical_code_review_comments": [],
+  "updated_files": [],
+  "success_rate": {"backend": "n/a (frontend-only)", "frontend": "100%"},
+  "test_credentials": "test@avrupapazari.com / Test12345! (from /app/memory/test_credentials.md)",
+  "seed_data_creation": "None. Reused existing 'Test Garson Arıyorum' job listing.",
+  "retest_needed": false,
+  "main_agent_can_self_test": true,
+  "context_for_next_testing_agent": "FOUC/jump fix verified end-to-end. CSS is loaded in <head> for search-vehicles/property/second-hand/businesses pages via $pageStyles+asset() with filemtime versioning. Job listing $displayTitle fallback confirmed, post-job novalidate + server-side [data-testid=job-errors] confirmed. Theme toggle still works on inner pages.",
+  "rca of the issue": "n/a — verification-only run confirming previous iteration fixes."
+}

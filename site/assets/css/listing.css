@@ -117,3 +117,14 @@
 
 @media (max-width: 1024px) { .ld-grid { grid-template-columns: 1fr; } .ld-info { order: -1; } .ld-quick-specs { grid-template-columns: repeat(3, 1fr); } }
 @media (max-width: 768px) { .ld-quick-specs { grid-template-columns: 1fr 1fr; } .ld-specs-grid { grid-template-columns: 1fr; } .ld-gallery-main { aspect-ratio: 16/9; } }
+
+/* Message seller modal */
+.ld-msg-overlay { position: fixed; inset: 0; z-index: 1200; display: flex; align-items: center; justify-content: center; padding: 20px; background: rgba(8,20,14,.6); backdrop-filter: blur(6px); opacity: 0; visibility: hidden; transition: opacity .2s, visibility .2s; }
+.ld-msg-overlay.show { opacity: 1; visibility: visible; }
+.ld-msg-card { position: relative; width: 100%; max-width: 460px; background: var(--surface); border: 1px solid var(--border); border-radius: 22px; padding: 28px; display: grid; gap: 12px; box-shadow: 0 30px 90px -20px rgba(0,0,0,.45); }
+.ld-msg-card h3 { margin: 0; font-family: 'Space Grotesk', sans-serif; font-size: 1.25rem; }
+.ld-msg-sub { margin: -6px 0 4px; color: var(--text-3); font-size: .85rem; }
+.ld-msg-card textarea { width: 100%; box-sizing: border-box; resize: vertical; border: 1px solid var(--border); border-radius: 12px; padding: 12px 14px; font: inherit; font-size: .92rem; background: var(--surface-2); color: var(--text); outline: 0; }
+.ld-msg-card textarea:focus { border-color: var(--accent); box-shadow: 0 0 0 4px var(--accent-light); }
+.ld-msg-close { position: absolute; top: 12px; right: 12px; width: 34px; height: 34px; border-radius: 10px; border: 1px solid var(--border); background: var(--surface-2); color: var(--text-2); font-size: 1.2rem; cursor: pointer; }
+.ld-msg-error { margin: 0; padding: 10px 12px; border-radius: 10px; background: #fef2f2; border: 1px solid #fecaca; color: #dc2626; font-size: .84rem; }

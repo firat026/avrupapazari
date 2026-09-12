@@ -115,7 +115,7 @@ var LANG_SELECT_CITY = '<?= t('post.select_city') ?>...';
 (function(){
 
     var ivOverlay=document.getElementById('ivOverlay'),selectedCat=null,selectedCountry=null;
-    function goPost(){var target=(selectedCat==='arac')?'<?= BASE_URL ?>/pages/post-vehicle.php':'<?= BASE_URL ?>/pages/post.php';if(!window.SITE_USER){closeIV();if(window.openAuth)window.openAuth('login');return;}window.location.href=target;}
+    function goPost(){var target=(selectedCat==='arac')?'<?= BASE_URL ?>/pages/post-vehicle.php':(selectedCat==='jobs'?'<?= BASE_URL ?>/pages/post-job.php':'<?= BASE_URL ?>/pages/post.php');var cSel=document.getElementById('ivCountrySelect');if(selectedCat==='jobs'&&cSel&&cSel.value){var o=cSel.options[cSel.selectedIndex];target+='?country_id='+encodeURIComponent(o.dataset.id||'');}if(!window.SITE_USER){closeIV();if(window.openAuth)window.openAuth('login');return;}window.location.href=target;}
     document.querySelectorAll('[data-open-post]').forEach(function(b){b.addEventListener('click',function(e){e.preventDefault();openIV();});});
     function openIV(){ivOverlay.classList.add('show');document.body.style.overflow='hidden';resetModal()}
     document.getElementById('ivClose').addEventListener('click',closeIV);

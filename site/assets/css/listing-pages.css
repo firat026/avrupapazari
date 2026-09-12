@@ -1,0 +1,62 @@
+/* Legacy listing pages (vehicles, property, second-hand, businesses) mapped onto the site design tokens.
+   Loaded after each page's own stylesheet. Dark theme works via the shared CSS variables. */
+:root, [data-theme="dark"] {
+  --sh-primary: var(--accent);
+  --sh-primary-hover: var(--accent-hover);
+  --sh-primary-light: var(--accent-light);
+  --sh-primary-border: var(--accent);
+  --sh-text-main: var(--text);
+  --sh-text-muted: var(--text-2);
+  --sh-border: var(--border);
+  --sh-bg-card: var(--surface);
+  --sh-bg-page: var(--bg);
+  --sh-radius: 18px;
+  --sh-shadow: 0 10px 30px -18px var(--card-shadow-hover);
+}
+.sh-page, .sh-page body { background: var(--bg) !important; color: var(--text); font-family: 'Instrument Sans', system-ui, sans-serif; }
+.sh-container { max-width: 1240px !important; padding: 0 24px !important; }
+.sh-hero-categories { background: var(--surface) !important; border: 1px solid var(--border); border-radius: 24px; margin: 28px auto 0 !important; max-width: 1240px; padding: 26px 32px !important; box-shadow: 0 20px 50px -30px var(--card-shadow-hover); }
+.sh-hero-title, .sh-hero-head h1 { font-family: 'Space Grotesk', sans-serif !important; letter-spacing: -0.03em; color: var(--text) !important; }
+.sh-breadcrumb, .sh-breadcrumb a { color: var(--text-3) !important; }
+.sh-map-btn { border-radius: 999px !important; background: var(--accent-light) !important; color: var(--accent) !important; border: 1px solid var(--border) !important; box-shadow: none !important; transition: border-color .2s, box-shadow .2s !important; }
+.sh-map-btn:hover { border-color: var(--accent) !important; box-shadow: 0 0 16px -4px var(--accent) !important; }
+
+.sh-layout { gap: 24px !important; margin-top: 24px !important; }
+.sh-sidebar { position: sticky; top: 144px; background: var(--surface) !important; border: 1px solid var(--border) !important; border-radius: 20px !important; padding: 20px !important; box-shadow: none !important; }
+.sh-filter-header-title, .sh-group-label { color: var(--text-3) !important; text-transform: uppercase; letter-spacing: .08em; font-size: .72rem !important; font-weight: 700 !important; }
+.sh-filter-group { border-bottom: 1px solid var(--border) !important; }
+.sh-sidebar select, .sh-sidebar input[type=text], .sh-sidebar input[type=number], .sh-sidebar input[type=search], .sh-sort-select, .sh-search-input-wrapper input { background: var(--surface-2) !important; color: var(--text) !important; border: 1px solid var(--border) !important; border-radius: 12px !important; height: 42px; font: inherit; font-size: .9rem; outline: 0; transition: border-color .2s, box-shadow .2s !important; }
+.sh-sidebar select:focus, .sh-sidebar input:focus, .sh-sort-select:focus { border-color: var(--accent) !important; box-shadow: 0 0 0 4px var(--accent-light) !important; }
+.sh-submit-btn { background: var(--accent) !important; border-radius: 12px !important; height: 44px; font-weight: 700; box-shadow: none !important; transition: background .2s, box-shadow .2s !important; }
+.sh-submit-btn:hover { background: var(--accent-hover) !important; box-shadow: 0 0 18px -4px var(--accent) !important; }
+.sh-reset-btn, .sh-clear-link { color: var(--text-3) !important; }
+.sh-cat-tree-link, .sh-cat-sub-link { color: var(--text-2) !important; border-radius: 10px !important; transition: background .15s, color .15s !important; }
+.sh-cat-tree-link:hover, .sh-cat-sub-link:hover { background: var(--surface-2) !important; color: var(--text) !important; }
+.sh-cat-tree-item.active > .sh-cat-tree-header .sh-cat-tree-link, .sh-cat-tree-link.active, .sh-cat-sub-link.active { background: var(--accent-light) !important; color: var(--accent) !important; }
+.sh-cat-card-count, .sh-total-badge { background: var(--surface-2) !important; color: var(--text-3) !important; border-radius: 999px !important; }
+.sh-radio-label { color: var(--text-2) !important; }
+
+.sh-toolbar { background: var(--surface) !important; border: 1px solid var(--border) !important; border-radius: 16px !important; box-shadow: none !important; min-height: 56px; }
+.sh-toolbar-info { color: var(--text-2) !important; font-weight: 600; }
+.sh-view-toggle button, .sh-view-toggle a { border-radius: 10px !important; color: var(--text-3) !important; }
+.sh-view-toggle .active { background: var(--accent-light) !important; color: var(--accent) !important; }
+
+.sh-grid { gap: 16px !important; }
+.sh-card { background: var(--surface) !important; border: 1px solid var(--border) !important; border-radius: 18px !important; box-shadow: none !important; overflow: hidden; transition: border-color .25s ease, box-shadow .25s ease !important; }
+.sh-card:hover { border-color: var(--accent) !important; box-shadow: 0 0 28px -8px var(--accent), 0 16px 32px -20px var(--card-shadow-hover) !important; transform: none !important; }
+.sh-card-media { background: var(--surface-2) !important; }
+.sh-card-title { color: var(--text) !important; font-weight: 600 !important; }
+.sh-card-price { color: var(--accent) !important; font-family: 'Space Grotesk', sans-serif !important; font-weight: 700 !important; }
+.sh-card-loc, .sh-card-date, .sh-card-desc, .sh-card-category, .sh-card-footer { color: var(--text-3) !important; }
+.sh-badge-premium { background: var(--gold) !important; color: #fff !important; border-radius: 999px !important; }
+.sh-badge-top { background: var(--accent) !important; color: #fff !important; border-radius: 999px !important; }
+.sh-empty-state { background: var(--surface) !important; border: 1px dashed var(--border) !important; border-radius: 22px !important; color: var(--text-2) !important; }
+.sh-empty-icon { color: var(--text-3) !important; }
+.sh-pagination a, .sh-page-btn { background: var(--surface) !important; border: 1px solid var(--border) !important; border-radius: 12px !important; color: var(--text-2) !important; box-shadow: none !important; transition: border-color .2s, color .2s !important; }
+.sh-pagination a:hover, .sh-page-btn:hover { border-color: var(--accent) !important; color: var(--accent) !important; }
+.sh-pagination .active, .sh-page-btn.active { background: var(--accent) !important; border-color: var(--accent) !important; color: #fff !important; }
+.sh-main-cats-sticky { background: var(--surface) !important; border: 1px solid var(--border) !important; border-radius: 16px !important; }
+@media (max-width: 960px) { .sh-sidebar { position: static; } }
+.sh-sidebar, .sh-sidebar * { box-sizing: border-box; }
+.sh-sidebar .sh-search-input-wrapper, .sh-sidebar .sh-select-wrapper, .sh-sidebar .sh-price-inputs { max-width: 100%; }
+.sh-sidebar .sh-search-input-wrapper input, .sh-sidebar select, .sh-sidebar input[type=text], .sh-sidebar input[type=number] { width: 100% !important; max-width: 100%; }

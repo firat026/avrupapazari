@@ -363,6 +363,7 @@ function getBusinessImageUrl(array $business): string {
 }
 
 $pageTitle = $text('businesses.page_title', 'Businesses');
+$pageStyles = ['businesses.css', 'listing-pages.css'];
 include __DIR__ . '/../includes/header.php';
 ?>
 <script>
@@ -375,7 +376,6 @@ include __DIR__ . '/../includes/header.php';
     } catch (e) {}
 })();
 </script>
-<link rel="stylesheet" href="<?= e(BASE_URL) ?>/assets/css/businesses.css?v=30">
 
 <main class="sh-page businesses-page">
     <div class="sh-container">

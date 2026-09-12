@@ -20,6 +20,7 @@ Yetkili yönlendirme URI: `https://ALANADINIZ/auth/google-callback.php`. Boş b�
 3. `sql/03_vehicle_form_translations.sql` — araç ilan formu metinleri
 4. `sql/04_category_filters.sql` — kategori/iş ilanları filtre metinleri
 5. `sql/05_favorites.sql` — favoriler metinleri
+6. `sql/06_messages_jobs.sql` — mesajlaşma metinleri + `listing_jobs` tablosu + iş ilanı formu metinleri
 
 Hepsi tekrar çalıştırılabilir (mevcut verinize zarar vermez).
 

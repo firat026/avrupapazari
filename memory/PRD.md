@@ -23,8 +23,11 @@ User (Turkish) uploaded their live cPanel site (PHP 8, MySQL, 4 langs) + SQL dum
 ## Round 3 (2026-06-12)
 - Favorites: ajax/toggle-favorite.php, favoriteButton() on cards (home/category/account), listing.php #favBtn rewired, account.php 'Favorilerim' section, header menu link, sql/05_favorites.sql. Tests iteration_4 pass. Zip rebuilt.
 
+## Round 4 (2026-06-12)
+- Header badges (favorites count, unread messages), messaging (ajax/send-message.php, messages.php inbox+thread, listing.php modal), job posting form pages/post-job.php (+listing_jobs table, post modal routes jobs there), inner pages restyled via assets/css/listing-pages.css (maps --sh-* vars -> site tokens, dark mode), homepage width fix (removed old .homepage rule from style.css, bigger type), FOUC fix (page CSS in head via $pageStyles, filemtime asset versions). sql/06_messages_jobs.sql. Tests iteration_5 (24/26 -> fixed) & iteration_6 pass. Zip rebuilt.
+
 ## Backlog
-- P1: Redesign inner pages (property/vehicles/second-hand/businesses/map) to new style + dark mode
+- P2: map.php restyle to new tokens
 - P1: Move $featuresLabels in post-vehicle.php to DB
 - P2: Admin UI English/translations
 - P2: Jobs posting form in post modal, admin pages for static_pages & translations editing

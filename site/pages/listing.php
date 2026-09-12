@@ -139,6 +139,7 @@ $pageTitle = $item['title'] . ' - ' . setting('site_name', 'AvrupaPazari');
 $displayTitle = $isProperty
     ? ($item['title'] ?? '')
     : trim(($item['brand'] ?? '') . ' ' . ($item['model'] ?? ''));
+if ($displayTitle === '') { $displayTitle = (string)$item['title']; }
 $pageStyles = ['listing.css'];
 include __DIR__ . '/../includes/header.php';
 ?>
@@ -227,7 +228,7 @@ include __DIR__ . '/../includes/header.php';
                 <div class="ld-price <?=$isSold?'sold':''?>">&euro; <?=number_format($item['price'],0,',','.')?></div>
                 <?php if($item['price_type']==='negotiable'&&!$isSold):?><div class="ld-price-type"><?= t('listing.price_negotiable') ?></div><?php endif;?>
                 <h1 class="ld-title"><?=htmlspecialchars($displayTitle)?></h1>
-                <p class="ld-subtitle"><?=htmlspecialchars($item['title'])?></p>
+                <?php if ($displayTitle !== (string)$item['title']): ?><p class="ld-subtitle"><?=htmlspecialchars($item['title'])?></p><?php endif; ?>
                 <div class="ld-quick-specs">
                     <?php if($item['build_year']):?><div class="ld-quick-spec"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg><div><div class="ld-quick-spec-label"><?= t('vehicle.year') ?></div><div class="ld-quick-spec-value"><?=$item['build_year']?></div></div></div><?php endif;?>
                     <?php if($item['mileage_km']):?><div class="ld-quick-spec"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"/><path d="M12 6v6l4 2"/></svg><div><div class="ld-quick-spec-label">KM</div><div class="ld-quick-spec-value"><?=number_format($item['mileage_km'],0,',','.')?></div></div></div><?php endif;?>
@@ -238,7 +239,7 @@ include __DIR__ . '/../includes/header.php';
                 </div>
                 <div class="ld-actions">
                     <?php if(!$isSold&&!$isReserved):?>
-                    <button class="ld-btn ld-btn-primary" onclick="window.location='contact.php?listing_id=<?=$item['id']?>'"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg><?= t('listing.send_message') ?></button>
+                    <button class="ld-btn ld-btn-primary" type="button" id="msgOpenBtn" data-testid="message-seller-button" onclick="openMsgForm()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg><?= t('listing.send_message') ?></button>
                     <button class="ld-btn ld-btn-secondary"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6A19.79 19.79 0 012.12 4.18 2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg><?= t('listing.call') ?></button>
                     <?php endif;?>
                     <button class="ld-btn ld-btn-favorite <?=$isFav?'active':''?>" id="favBtn" onclick="toggleFav()"><svg viewBox="0 0 24 24" fill="<?=$isFav?'currentColor':'none'?>" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg><span id="favText"><?=$isFav? t('listing.saved') : t('listing.add_favorite') ?></span></button>
@@ -331,5 +332,32 @@ function toggleFav() {
         else{btn.classList.remove('active');btn.querySelector('svg').setAttribute('fill','none');txt.textContent=LANG_ADD_FAV;}
     });
 }
+</script>
+<?php $ownListing = $userId && (int)$item['user_id'] === (int)$userId; ?>
+<div class="ld-msg-overlay" id="msgOverlay" data-testid="message-modal">
+  <form class="ld-msg-card" id="msgForm">
+    <button type="button" class="ld-msg-close" onclick="closeMsgForm()" aria-label="close">&times;</button>
+    <h3><?= e(t('msg.send')) ?></h3>
+    <p class="ld-msg-sub"><?= e($item['title']) ?></p>
+    <input type="hidden" name="csrf" value="<?= e(csrfToken()) ?>">
+    <input type="hidden" name="listing_id" value="<?= (int)$item['id'] ?>">
+    <textarea name="body" rows="4" required placeholder="<?= e(t('msg.placeholder')) ?>" data-testid="message-body"></textarea>
+    <p class="ld-msg-error" id="msgError" hidden data-testid="message-error"></p>
+    <button type="submit" class="ld-btn ld-btn-primary" data-testid="message-submit"><?= e(t('msg.send')) ?></button>
+  </form>
+</div>
+<script>
+var MSG_OWN = <?= $ownListing ? 'true' : 'false' ?>;
+function openMsgForm(){ if(!window.SITE_USER){ if(window.openAuth) window.openAuth('login'); return; } if(MSG_OWN){ alert('<?= e(t('msg.own_listing')) ?>'); return; } document.getElementById('msgOverlay').classList.add('show'); setTimeout(function(){document.querySelector('#msgForm textarea').focus();},100); }
+function closeMsgForm(){ document.getElementById('msgOverlay').classList.remove('show'); }
+document.getElementById('msgOverlay').addEventListener('click', function(e){ if(e.target===this) closeMsgForm(); });
+document.getElementById('msgForm').addEventListener('submit', function(e){
+  e.preventDefault(); var f=this, err=document.getElementById('msgError'), btn=f.querySelector('button[type=submit]'); err.hidden=true; btn.disabled=true;
+  fetch('<?= url('ajax/send-message.php') ?>', {method:'POST', body:new FormData(f), credentials:'same-origin'}).then(function(r){return r.json();}).then(function(d){
+    if(d.status==='login_required'){ closeMsgForm(); if(window.openAuth) window.openAuth('login'); return; }
+    if(!d.ok){ err.textContent=d.error||'Error'; err.hidden=false; btn.disabled=false; return; }
+    window.location.href=d.redirect;
+  }).catch(function(){ err.textContent='Network error'; err.hidden=false; btn.disabled=false; });
+});
 </script>
 <?php include __DIR__ . '/../includes/footer.php'; ?>

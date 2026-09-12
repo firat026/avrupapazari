@@ -13,8 +13,10 @@ function url(string $path = ''): string
     return BASE_URL . '/' . ltrim($path, '/');
 }
 
-function asset(string $path, string $version = '3'): string
+function asset(string $path): string
 {
+    $file = __DIR__ . '/assets/' . ltrim($path, '/');
+    $version = is_file($file) ? (string)filemtime($file) : '1';
     return url('assets/' . ltrim($path, '/')) . '?v=' . $version;
 }
 

@@ -213,6 +213,7 @@ function getVehicleImage(array $item): string {
 }
 
 $pageTitle = ($selectedCategory ? $selectedCategory['name'] . ' - ' : '') . (t('vehicles.title') ?: (t('nav.arac') ?: 'Araç İlanları'));
+$pageStyles = ['search-vehicles.css', 'listing-pages.css'];
 include __DIR__ . '/../includes/header.php';
 ?>
 <script>
@@ -231,7 +232,6 @@ try {
     }
 } catch (e) {}
 </script>
-<link rel="stylesheet" href="<?= e(BASE_URL) ?>/assets/css/search-vehicles.css?v=7">
 
 <main class="sh-page">
     <!-- Breadcrumb & Top Bar -->

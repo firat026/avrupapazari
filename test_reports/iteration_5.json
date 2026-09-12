@@ -1,0 +1,29 @@
+{
+  "summary": "Frontend testing of iteration 5 features on PHP AvrupaPazari site. Tested: (1) homepage width bug fix, (2) header favorite badge, (3) messaging flow (send/reply/unread), (4) job posting via post-ad modal, (5) inner pages restyle + dark mode + logged-out redirects. 24/26 scenarios PASS. Two issues found: (a) newly-posted job listing detail page has EMPTY <h1 class=\"ld-title\"></h1> — title only appears in <title> and .ld-subtitle; (b) empty-job-form submit uses HTML5 required attributes so the browser shows a native validation tooltip instead of the server-rendered data-testid='job-errors' panel (server-side validation panel not reachable without bypassing HTML5).",
+  "backend_issues": {"critical": [], "minor": []},
+  "frontend_issues": {
+    "ui_bugs": [
+      {"component": "pages/listing.php (job posting)", "issue": "<h1 class='ld-title'> is empty on newly-created job listings; title appears in <title>, .ld-subtitle, .ld-msg-sub but the primary H1 is blank. Slug=test-garson-ariyorum-cf858a reproduces it.", "selector": "h1.ld-title", "priority": "MEDIUM"},
+      {"component": "pages/post-job.php", "issue": "Form fields use HTML5 required attribute, so submitting empty form shows the browser's native 'Please fill out this field' tooltip instead of the server-rendered data-testid='job-errors' block. The server-side error panel is never visible in normal user flow. Consider adding novalidate on the form so PHP-side validation errors are rendered.", "selector": "[data-testid='job-errors']", "priority": "LOW"}
+    ],
+    "integration_issues": [],
+    "design_issues": [
+      {"screen": "homepage width", "issues": ["Header .header-inner and .home .container align perfectly (both 1288px wide, deltaLeft=0, deltaRight=0) at viewport 1920 — bug fix confirmed. Note: actual width is 1288px not the ~1192px cited in the spec, but the important thing (header/home alignment) is correct. home-title font-size 49.6px >= 44px PASS."]}
+    ]
+  },
+  "test_report_links": [],
+  "action_items": [
+    "Fix empty <h1 class='ld-title'> on job listing detail page (populate from listing title).",
+    "Consider adding novalidate on post-job form (or JS-driven validation) so data-testid='job-errors' server panel is reachable and visible for the empty-submit test spec."
+  ],
+  "critical_code_review_comments": [
+    "Job listing h1 template appears to render only for non-job listings; job type listings render an empty h1 — check pages/listing.php template branch for jobs."
+  ],
+  "updated_files": [],
+  "success_rate": {"backend": "N/A", "frontend": "92%"},
+  "test_credentials": "test@avrupapazari.com / Test12345! ; admin@avrupapazari.com / Admin12345!",
+  "seed_data_creation": "Created 1 conversation (id=1) between test user and admin (2 messages from test + 1 reply from test). Created 1 job listing slug=test-garson-ariyorum-cf858a (test user, sector=İnşaat, city=Almere, type=seek). Admin viewed the conversation, unread cleared. Per instructions, left in DB.",
+  "retest_needed": false,
+  "main_agent_can_self_test": true,
+  "context_for_next_testing_agent": "Passing scenarios: homepage width alignment (header/home both 1288px, delta=0); home-title font 49.6px; login via join-button -> auth-tab-login modal; fav badge appears with '1' inside user-menu-toggle after favoriting on / and reload, disappears after unfav+reload; menu-messages link -> /messages.php; message-seller-button on listing.php while logged-out opens #authModal.show; while logged-in opens message-modal.show, sending redirects to /messages.php?c=1 with .msg-bubble.mine, conversation-list has conversation-1; reply via reply-body+reply-submit adds bubble without reload; logout via menu-logout; admin login shows unread-count-badge '2', /messages.php has conversation-unread, opening conversation shows bubbles without .mine, reload clears unread badge; nav-post-ad -> .iv-cat-item[data-module=jobs] -> plate section hidden -> #ivCountrySelect=NL -> #ivContinueBtn navigates to /pages/post-job.php?country_id=1; post-job-page testid present, job-country preselected 1; filled form (job-type-seek, title, sector İnşaat, salary, country=1, city dropdown populated via ajax/get-cities.php with option value 8=Almere, description) submitted -> redirected to /pages/listing.php?slug=test-garson-ariyorum-cf858a&posted=1 (200); jobs.php category-results shows 1 card with 'Test Garson Arıyorum' (initial JS-includes check was flaky, direct DOM re-check confirmed it is present); nav-jobs exists; /pages/post.php data-testid='post-jobs' href=/pages/post-job.php; inner pages /pages/search-vehicles.php /property.php /second-hand.php /businesses.php all 200 with listing-pages.css loaded and no console errors; theme-toggle switches .sh-page from rgb(247,250,248) to rgb(15,26,20) and .sh-card from white to rgb(22,32,24); sidebar input right edge (591.5) <= sidebar right (612.5); sort select AJAX filter updates URL to ?sort=oldest without full navigation; logged-out /messages.php and /pages/post-job.php both redirect to /?auth=login."
+}
